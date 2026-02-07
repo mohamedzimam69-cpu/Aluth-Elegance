@@ -102,7 +102,7 @@ $products = $db->query("SELECT * FROM products ORDER BY created_at DESC")->fetch
                             <td><img src="../<?php echo htmlspecialchars($product['image']); ?>" width="50" style="border-radius:5px;" onerror="this.src='../images/placeholder.jpg'"></td>
                             <td><?php echo htmlspecialchars($product['name']); ?></td>
                             <td><?php echo htmlspecialchars($product['category']); ?></td>
-                            <td>$<?php echo number_format((float)$product['price'], 2); ?></td>
+                            <td>Rs. <?php echo number_format((float)$product['price'], 2); ?></td>
                             <td><?php echo $product['stock']; ?></td>
                             <td><?php echo $product['featured'] ? '⭐ Yes' : 'No'; ?></td>
                             <td>
@@ -145,16 +145,14 @@ $products = $db->query("SELECT * FROM products ORDER BY created_at DESC")->fetch
                     <textarea name="description" id="productDescription" rows="4"></textarea>
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Price ($) *</label>
-                        <input type="number" step="0.01" name="price" id="productPrice" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Stock Quantity *</label>
-                        <input type="number" name="stock" id="productStock" value="0" required>
-                    </div>
+                <div class="form-group">
+                    <label>Price (LKR) *</label>
+                    <input type="number" step="0.01" name="price" id="productPrice" placeholder="129900.00" required>
+                    <small>Enter price in Sri Lankan Rupees (e.g., 129900.00)</small>
+                </div>
+                <div class="form-group">
+                    <label>Stock Quantity *</label>
+                    <input type="number" name="stock" id="productStock" value="0" required>
                 </div>
                 
                 <div class="form-group">
@@ -168,9 +166,29 @@ $products = $db->query("SELECT * FROM products ORDER BY created_at DESC")->fetch
                 </div>
                 
                 <div class="form-group">
-                    <label>Image Path *</label>
-                    <input type="text" name="image" id="productImage" placeholder="images/product.jpg" required>
-                    <small>Upload image to images/ folder first, then enter path</small>
+                    <label>Image Upload *</label>
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="imagePreview">
+                            <i class="fas fa-image" style="font-size: 48px; color: #ddd;"></i>
+                            <p style="color: #999; margin-top: 10px;">No image selected</p>
+                        </div>
+                        <div class="upload-controls">
+                            <input type="file" id="imageFile" accept="image/*" style="display: none;">
+                            <button type="button" class="btn-upload" onclick="document.getElementById('imageFile').click()">
+                                <i class="fas fa-upload"></i> Choose Image
+                            </button>
+                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                                Supported: JPG, PNG, GIF, WEBP (Max 5MB)
+                            </p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="image" id="productImage" required>
+                    <div id="uploadProgress" style="display: none; margin-top: 10px;">
+                        <div style="background: #e0e0e0; border-radius: 10px; height: 20px; overflow: hidden;">
+                            <div id="progressBar" style="background: #D4AF37; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                        <p id="uploadStatus" style="font-size: 12px; color: #666; margin-top: 5px;">Uploading...</p>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -189,10 +207,65 @@ $products = $db->query("SELECT * FROM products ORDER BY created_at DESC")->fetch
     </div>
 
     <script>
+        // Image upload handling
+        let uploadedImagePath = '';
+        
+        document.getElementById('imageFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = `
+                    <img src="${e.target.result}" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                `;
+            };
+            reader.readAsDataURL(file);
+            
+            // Upload file
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            document.getElementById('uploadProgress').style.display = 'block';
+            document.getElementById('uploadStatus').textContent = 'Uploading...';
+            
+            fetch('upload-image.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    uploadedImagePath = data.path;
+                    document.getElementById('productImage').value = data.path;
+                    document.getElementById('progressBar').style.width = '100%';
+                    document.getElementById('uploadStatus').textContent = '✓ Upload successful!';
+                    document.getElementById('uploadStatus').style.color = '#27ae60';
+                    
+                    setTimeout(() => {
+                        document.getElementById('uploadProgress').style.display = 'none';
+                    }, 2000);
+                } else {
+                    alert('Upload failed: ' + data.error);
+                    document.getElementById('uploadProgress').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                alert('Upload error: ' + error);
+                document.getElementById('uploadProgress').style.display = 'none';
+            });
+        });
+        
         function showAddModal() {
             document.getElementById('modalTitle').textContent = 'Add New Product';
             document.getElementById('formAction').value = 'add';
             document.getElementById('productForm').reset();
+            document.getElementById('imagePreview').innerHTML = `
+                <i class="fas fa-image" style="font-size: 48px; color: #ddd;"></i>
+                <p style="color: #999; margin-top: 10px;">No image selected</p>
+            `;
+            uploadedImagePath = '';
             document.getElementById('productModal').style.display = 'block';
         }
         
@@ -207,6 +280,15 @@ $products = $db->query("SELECT * FROM products ORDER BY created_at DESC")->fetch
             document.getElementById('productCategory').value = product.category;
             document.getElementById('productImage').value = product.image;
             document.getElementById('productFeatured').checked = product.featured == 1;
+            
+            // Show existing image
+            if (product.image) {
+                document.getElementById('imagePreview').innerHTML = `
+                    <img src="../${product.image}" style="max-width: 100%; max-height: 200px; border-radius: 8px;" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22>No Image</text></svg>'">
+                `;
+            }
+            
+            uploadedImagePath = product.image;
             document.getElementById('productModal').style.display = 'block';
         }
         

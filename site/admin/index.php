@@ -68,7 +68,7 @@ $pendingOrders = $db->query("SELECT COUNT(*) FROM orders WHERE status = 'pending
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
                     <div class="stat-info">
-                        <h3>$<?php echo number_format((float)$totalRevenue, 2); ?></h3>
+                        <h3>Rs. <?php echo number_format((float)$totalRevenue, 2); ?></h3>
                         <p>Total Revenue</p>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ $pendingOrders = $db->query("SELECT COUNT(*) FROM orders WHERE status = 'pending
                                 echo "<tr>
                                     <td>#{$order['id']}</td>
                                     <td>{$order['customer_name']}</td>
-                                    <td>$" . number_format((float)$order['total_amount'], 2) . "</td>
+                                    <td>Rs. " . number_format((float)$order['total_amount'], 2) . "</td>
                                     <td><span class='status-{$order['status']}'>" . ucfirst($order['status']) . "</span></td>
                                     <td>" . date('M d, Y', strtotime($order['created_at'])) . "</td>
                                 </tr>";

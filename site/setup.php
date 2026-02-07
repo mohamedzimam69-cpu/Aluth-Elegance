@@ -119,10 +119,10 @@ try {
     $stmt = $conn->query("SELECT COUNT(*) FROM products");
     if ($stmt->fetchColumn() == 0) {
         $conn->exec("INSERT INTO products (name, description, price, category, image, featured, stock) VALUES
-            ('Venetian Marble Basin', 'Luxurious handcrafted marble basin with elegant finish', 1299.00, 'Tile Basins', 'images/product1.jpg', TRUE, 10),
-            ('Azure Mosaic Sink', 'Beautiful mosaic design with azure blue tiles', 899.00, 'Tile Basins', 'images/product2.jpg', TRUE, 15),
-            ('Golden Soap Dispenser', 'Premium brass soap dispenser with gold finish', 149.00, 'Accessories', 'images/product3.jpg', TRUE, 25),
-            ('Terracotta Vanity Set', 'Complete vanity set with terracotta finish', 349.00, 'Home Accents', 'images/product4.jpg', TRUE, 8)");
+            ('Venetian Marble Basin', 'Luxurious handcrafted marble basin with elegant finish', 129900.00, 'Tile Basins', 'images/product1.jpg', TRUE, 10),
+            ('Azure Mosaic Sink', 'Beautiful mosaic design with azure blue tiles', 89900.00, 'Tile Basins', 'images/product2.jpg', TRUE, 15),
+            ('Golden Soap Dispenser', 'Premium brass soap dispenser with gold finish', 14900.00, 'Accessories', 'images/product3.jpg', TRUE, 25),
+            ('Terracotta Vanity Set', 'Complete vanity set with terracotta finish', 34900.00, 'Home Accents', 'images/product4.jpg', TRUE, 8)");
         echo "✓ Sample products inserted<br>";
     }
     

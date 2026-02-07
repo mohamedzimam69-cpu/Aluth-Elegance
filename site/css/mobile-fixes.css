@@ -1,0 +1,74 @@
+/* Additional Mobile Optimizations */
+
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Touch-friendly tap targets */
+@media (max-width: 768px) {
+    a, button, .btn, input, select, textarea {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Better spacing for mobile */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Improve readability */
+    body {
+        font-size: 16px;
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    /* Better button sizing */
+    .btn {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    /* Improve form inputs */
+    input, textarea, select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Better modal on mobile */
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    /* Improve cart display */
+    #cartItems > div {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* Better product cards */
+    .product-card {
+        margin-bottom: 15px;
+    }
+    
+    /* Improve navigation */
+    .nav {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .nav::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Landscape mode fixes */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        min-height: 400px;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+    }
+}

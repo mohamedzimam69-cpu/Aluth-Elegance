@@ -397,6 +397,53 @@ table img {
     background: #7f8c8d;
 }
 
+/* Image Upload Styles */
+.image-upload-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    border: 2px dashed #ddd;
+}
+
+.image-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.upload-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-upload {
+    padding: 12px 24px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-upload:hover {
+    background: #c19d2e;
+}
+
 .alert-success {
     background: #27ae60;
     color: white;
@@ -405,8 +452,117 @@ table img {
     margin-bottom: 20px;
 }
 
-.btn-primary i,
-.btn-edit i,
-.btn-delete i {
-    margin-right: 5px;
+/* Responsive Admin Panel */
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px 0;
+    }
+    
+    .sidebar .logo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .admin-nav {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .admin-nav a {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 20px 15px;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .admin-header h1 {
+        font-size: 24px;
+    }
+    
+    .user-info {
+        font-size: 12px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .stat-icon i {
+        font-size: 20px;
+    }
+    
+    .stat-info h3 {
+        font-size: 24px;
+    }
+    
+    .stat-info p {
+        font-size: 12px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    table th,
+    table td {
+        padding: 10px 8px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-upload-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-primary,
+    .btn-edit,
+    .btn-delete {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
 }

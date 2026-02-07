@@ -624,27 +624,237 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .header {
+        padding: 15px 0;
+    }
+    
     .header .container {
         flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .logo h1 {
+        font-size: 22px;
     }
     
     .nav {
         order: 3;
         width: 100%;
-        margin-top: 20px;
-        justify-content: center;
+        justify-content: space-between;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+    
+    .nav a {
+        font-size: 12px;
+        white-space: nowrap;
+    }
+    
+    .header-icons {
+        gap: 15px;
+    }
+    
+    .header-icons i {
+        font-size: 16px;
+    }
+    
+    /* Hero Section */
+    .hero {
+        min-height: 500px;
+        padding: 40px 0;
+    }
+    
+    .hero-content {
+        padding: 0 20px;
+        max-width: 100%;
     }
     
     .hero-title {
         font-size: 32px;
+        line-height: 1.3;
+    }
+    
+    .hero-description {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 25px;
+        font-size: 14px;
+    }
+    
+    /* Categories */
+    .categories {
+        padding: 50px 0;
     }
     
     .categories .container {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .category-card {
+        height: 300px;
+    }
+    
+    .category-overlay h3 {
+        font-size: 22px;
+    }
+    
+    /* Featured Products */
+    .featured-products {
+        padding: 50px 0;
     }
     
     .section-header {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .section-header h2 {
+        font-size: 28px;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+    
+    .product-card {
+        font-size: 14px;
+    }
+    
+    .product-image {
+        height: 180px;
+    }
+    
+    .product-info {
+        padding: 12px;
+    }
+    
+    .product-info h3 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .product-price {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .product-badge {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+    
+    /* Collections Preview */
+    .collections-preview {
+        padding: 50px 0;
+    }
+    
+    .collections-preview h2 {
+        font-size: 28px;
+    }
+    
+    .section-description {
+        font-size: 14px;
+        padding: 0 15px;
+    }
+    
+    /* Promise Section */
+    .promise {
+        padding: 50px 0;
+    }
+    
+    .promise h2 {
+        font-size: 28px;
+    }
+    
+    .promise-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .promise-card h3 {
+        font-size: 18px;
+    }
+    
+    .promise-card p {
+        font-size: 14px;
+    }
+    
+    /* Footer */
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-col h3 {
+        font-size: 20px;
+    }
+    
+    .footer-col p,
+    .footer-col ul li {
+        font-size: 14px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input {
+        border-radius: 5px;
+    }
+    
+    .newsletter-form button {
+        border-radius: 5px;
+        padding: 12px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 20px;
+    }
+    
+    .hero-title {
+        font-size: 26px;
+    }
+    
+    .hero-subtitle {
+        font-size: 12px;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-image {
+        height: 250px;
+    }
+    
+    .section-header h2,
+    .collections-preview h2,
+    .promise h2 {
+        font-size: 24px;
     }
 }

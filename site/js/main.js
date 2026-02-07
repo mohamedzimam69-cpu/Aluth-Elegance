@@ -128,7 +128,7 @@ function viewCart() {
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee;">
                             <div>
                                 <h4 style="margin: 0 0 5px 0;">${item.name}</h4>
-                                <p style="margin: 0; color: #666;">$${item.price} x ${item.quantity}</p>
+                                <p style="margin: 0; color: #666;">Rs. ${formatPrice(item.price)} x ${item.quantity}</p>
                             </div>
                             <div style="display: flex; gap: 10px; align-items: center;">
                                 <button onclick="updateQuantity(${item.id}, -1)" style="padding: 5px 10px; background: #e74c3c; color: white; border: none; border-radius: 3px; cursor: pointer;">-</button>
@@ -142,7 +142,7 @@ function viewCart() {
                 <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #ddd;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
                         <strong>Total:</strong>
-                        <strong style="color: #D4AF37; font-size: 24px;">$${calculateTotal()}</strong>
+                        <strong style="color: #D4AF37; font-size: 24px;">Rs. ${formatPrice(calculateTotal())}</strong>
                     </div>
                     <button onclick="checkout()" style="width: 100%; padding: 15px; background: #D4AF37; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer;">Proceed to Checkout</button>
                 </div>
@@ -202,10 +202,10 @@ async function loadFeaturedProducts() {
         console.error('Error loading products:', error);
         // Show sample products if API fails
         displayProducts([
-            {id: 1, name: 'Venetian Marble Basin', price: 1299, category: 'Tile Basins', image: 'images/product1.jpg'},
-            {id: 2, name: 'Azure Mosaic Sink', price: 899, category: 'Tile Basins', image: 'images/product2.jpg'},
-            {id: 3, name: 'Golden Soap Dispenser', price: 149, category: 'Accessories', image: 'images/product3.jpg'},
-            {id: 4, name: 'Terracotta Vanity Set', price: 349, category: 'Home Accents', image: 'images/product4.jpg'}
+            {id: 1, name: 'Venetian Marble Basin', price: 129900, category: 'Tile Basins', image: 'images/product1.jpg'},
+            {id: 2, name: 'Azure Mosaic Sink', price: 89900, category: 'Tile Basins', image: 'images/product2.jpg'},
+            {id: 3, name: 'Golden Soap Dispenser', price: 14900, category: 'Accessories', image: 'images/product3.jpg'},
+            {id: 4, name: 'Terracotta Vanity Set', price: 34900, category: 'Home Accents', image: 'images/product4.jpg'}
         ]);
     }
 }
@@ -222,13 +222,20 @@ function displayProducts(products) {
             </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <p class="product-price">$${product.price}</p>
+                <p class="product-price">Rs. ${formatPrice(product.price)}</p>
                 <button class="btn btn-primary" onclick='addToCart(${JSON.stringify(product)})'>
                     <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
             </div>
         </div>
     `).join('');
+}
+
+function formatPrice(price) {
+    return parseFloat(price).toLocaleString('en-LK', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
 
 // Navigation functions

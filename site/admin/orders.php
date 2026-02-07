@@ -67,7 +67,7 @@ $orders = $db->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll(
                             <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
                             <td><?php echo htmlspecialchars($order['customer_email']); ?></td>
                             <td><?php echo htmlspecialchars($order['customer_phone']); ?></td>
-                            <td>$<?php echo number_format((float)$order['total_amount'], 2); ?></td>
+                            <td>Rs. <?php echo number_format((float)$order['total_amount'], 2); ?></td>
                             <td><span class="status-<?php echo $order['status']; ?>"><?php echo ucfirst($order['status']); ?></span></td>
                             <td><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
                             <td>
