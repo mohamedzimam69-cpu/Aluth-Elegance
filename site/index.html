@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aluth Elegance - Luxury Tile Basins & Home Accents</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Aluth<span>Elegance</span></h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html">HOME</a>
+                <a href="shop.html">SHOP</a>
+                <a href="collections.html">COLLECTIONS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+            <div class="header-icons">
+                <i class="fas fa-search" onclick="toggleSearch()" title="Search Products"></i>
+                <i class="fas fa-heart" onclick="showNotification('Wishlist feature - Click heart on products!', 'info')" title="Wishlist"></i>
+                <i class="fas fa-user" onclick="window.location.href='admin/login.php'" title="Admin Login"></i>
+                <div class="cart-icon" onclick="viewCart()" title="View Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" style="display: none;">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">LUXURY HOME COLLECTION</p>
+            <h2 class="hero-title">Elevate Your Space with<br><span>Timeless Elegance</span></h2>
+            <p class="hero-description">Discover our exquisite collection of handcrafted tile basins and home accents. Each piece is designed to transform your bathroom into a sanctuary of sophistication.</p>
+            <div class="hero-buttons">
+                <a href="shop.html" class="btn btn-primary" onclick="navigateToShop(event)">Shop Now <i class="fas fa-arrow-right"></i></a>
+                <a href="collections.html" class="btn btn-secondary" onclick="navigateToCollections(event)">View Collections</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="category-card">
+                <img src="images/tile-basins.jpg" alt="Tile Basins">
+                <div class="category-overlay">
+                    <h3>Tile Basins</h3>
+                    <p>Handcrafted ceramic masterpieces</p>
+                    <a href="collections.html?category=basins" class="category-link">Explore Collection <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="images/bathroom-accessories.jpg" alt="Bathroom Accessories">
+                <div class="category-overlay">
+                    <h3>Bathroom Accessories</h3>
+                    <p>Elegant finishing touches</p>
+                    <a href="collections.html?category=accessories" class="category-link">Explore Collection <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="images/home-accents.jpg" alt="Home Accents">
+                <div class="category-overlay">
+                    <h3>Home Accents</h3>
+                    <p>Sophisticated decor pieces</p>
+                    <a href="collections.html?category=accents" class="category-link">Explore Collection <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <p class="section-subtitle">CURATED SELECTION</p>
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <a href="shop.html" class="view-all">View All Products <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="products-grid" id="featured-products">
+                <!-- Products loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section class="collections-preview">
+        <div class="container">
+            <p class="section-subtitle">OUR COLLECTIONS</p>
+            <h2>Explore Our Categories</h2>
+            <p class="section-description">Discover curated collections designed to bring luxury and sophistication to every corner of your home.</p>
+        </div>
+    </section>
+
+    <!-- Promise Section -->
+    <section class="promise">
+        <div class="container">
+            <p class="section-subtitle">WHY ALUTH ELEGANCE</p>
+            <h2>The Aluth Elegance Promise</h2>
+            <p class="section-description">We're committed to delivering exceptional quality and service that exceeds your expectations.</p>
+            <div class="promise-grid">
+                <div class="promise-card">
+                    <div class="promise-icon"><i class="fas fa-award"></i></div>
+                    <h3>Premium Quality</h3>
+                    <p>Each piece is handcrafted with the finest materials and meticulous attention to detail.</p>
+                </div>
+                <div class="promise-card">
+                    <div class="promise-icon"><i class="fas fa-truck"></i></div>
+                    <h3>Free Shipping</h3>
+                    <p>Enjoy complimentary shipping on all orders over $500 within the continental US.</p>
+                </div>
+                <div class="promise-card">
+                    <div class="promise-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>5-Year Warranty</h3>
+                    <p>Shop with confidence knowing your purchase is protected by our comprehensive warranty.</p>
+                </div>
+                <div class="promise-card">
+                    <div class="promise-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Expert Support</h3>
+                    <p>Our dedicated team of design experts is here to help you every step of the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Aluth<span>Elegance</span></h3>
+                    <p>Transforming spaces with timeless elegance and sophisticated design.</p>
+                    <div style="margin-top: 15px;">
+                        <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt" style="color: #D4AF37; margin-right: 8px;"></i> 96, ARH Road, Paddiyadipiddy, Akkaraipattu</p>
+                        <p style="margin: 5px 0;"><i class="fas fa-phone" style="color: #D4AF37; margin-right: 8px;"></i> <a href="tel:+94759464831" style="color: inherit; text-decoration: none;">+94 75 946 4831</a></p>
+                        <p style="margin: 5px 0;"><i class="fas fa-envelope" style="color: #D4AF37; margin-right: 8px;"></i> <a href="mailto:aluthelegance@gmail.com" style="color: inherit; text-decoration: none;">aluthelegance@gmail.com</a></p>
+                    </div>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for exclusive offers and updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aluth Elegance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

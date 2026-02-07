@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Aluth Elegance</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Aluth<span>Elegance</span></h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html">HOME</a>
+                <a href="shop.html">SHOP</a>
+                <a href="collections.html">COLLECTIONS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+            <div class="header-icons">
+                <i class="fas fa-search" onclick="toggleSearch()" title="Search Products"></i>
+                <i class="fas fa-heart" onclick="showNotification('Wishlist feature - Click heart on products!', 'info')" title="Wishlist"></i>
+                <i class="fas fa-user" onclick="window.location.href='admin/login.php'" title="Admin Login"></i>
+                <div class="cart-icon" onclick="viewCart()" title="View Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" style="display: none;">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section style="padding: 80px 0;">
+        <div class="container">
+            <h1 style="font-size: 36px; margin-bottom: 40px;">All Products</h1>
+            <div class="products-grid" id="all-products"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Aluth<span>Elegance</span></h3>
+                    <p>Transforming spaces with timeless elegance and sophisticated design.</p>
+                    <div style="margin-top: 15px;">
+                        <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt" style="color: #D4AF37; margin-right: 8px;"></i> 96, ARH Road, Paddiyadipiddy, Akkaraipattu</p>
+                        <p style="margin: 5px 0;"><i class="fas fa-phone" style="color: #D4AF37; margin-right: 8px;"></i> <a href="tel:+94759464831" style="color: inherit; text-decoration: none;">+94 75 946 4831</a></p>
+                        <p style="margin: 5px 0;"><i class="fas fa-envelope" style="color: #D4AF37; margin-right: 8px;"></i> <a href="mailto:aluthelegance@gmail.com" style="color: inherit; text-decoration: none;">aluthelegance@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aluth Elegance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        async function loadAllProducts() {
+            try {
+                const response = await fetch('api/products.php');
+                const products = await response.json();
+                displayAllProducts(products);
+            } catch (error) {
+                console.error('Error:', error);
+                // Show sample products if API fails
+                displayAllProducts([
+                    {id: 1, name: 'Venetian Marble Basin', price: 1299, category: 'Tile Basins', image: 'images/product1.jpg'},
+                    {id: 2, name: 'Azure Mosaic Sink', price: 899, category: 'Tile Basins', image: 'images/product2.jpg'},
+                    {id: 3, name: 'Golden Soap Dispenser', price: 149, category: 'Accessories', image: 'images/product3.jpg'},
+                    {id: 4, name: 'Terracotta Vanity Set', price: 349, category: 'Home Accents', image: 'images/product4.jpg'}
+                ]);
+            }
+        }
+        
+        function displayAllProducts(products) {
+            const container = document.getElementById('all-products');
+            container.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'">
+                        <span class="product-badge">${product.category}</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-price">$${product.price}</p>
+                        <button class="btn btn-primary" onclick='addToCart(${JSON.stringify(product)})'>
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        loadAllProducts();
+    </script>
+</body>
+</html>
