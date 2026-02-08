@@ -129,8 +129,13 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 0L100 100M100 0L0 100" stroke="rgba(212,175,55,0.1)" stroke-width="1"/></svg>');
-    opacity: 0.3;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content {
@@ -260,6 +265,7 @@ body {
     border-radius: 10px;
     height: 400px;
     cursor: pointer;
+    background: #f5f5f5;
 }
 
 .category-card img {
@@ -267,30 +273,7 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.category-card img[src*="tile-basins"] {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.category-card img[src*="bathroom-accessories"] {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.category-card img[src*="home-accents"] {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.category-card img[alt]:not([src]),
-.category-card img[src=""]:after {
-    content: attr(alt);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
+    display: block;
 }
 
 .category-card:hover img {
@@ -393,30 +376,32 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
 }
 
-/* Fallback for missing images */
 .product-image {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+    background: #f5f5f5;
+}
+
+/* Show placeholder only if image fails to load */
+.product-image img[src=""],
+.product-image img:not([src]) {
+    display: none;
+}
+
+.product-image img[src=""]:after,
+.product-image img:not([src]):after {
+    content: 'No Image';
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     font-size: 18px;
-    font-weight: 600;
-}
-
-.product-card:nth-child(2) .product-image {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.product-card:nth-child(3) .product-image {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.product-card:nth-child(4) .product-image {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
 .product-badge {

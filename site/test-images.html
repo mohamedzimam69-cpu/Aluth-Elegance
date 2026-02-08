@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test - Aluth Elegance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+        .test-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border: 2px solid #D4AF37;
+            border-radius: 8px;
+            display: block;
+            margin: 10px 0;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        h2 {
+            color: #2C3E50;
+        }
+        .info {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖼️ Image Display Test</h1>
+    
+    <div class="info">
+        <strong>📋 Instructions:</strong>
+        <ol>
+            <li>Check if images load below</li>
+            <li>If you see "Image loaded successfully" - images work!</li>
+            <li>If you see "Image failed to load" - add images to the images/ folder</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 1: Product Image</h2>
+        <img src="images/product1.jpg" alt="Product 1" class="test-image" id="img1" 
+             onload="showStatus('img1', true)" 
+             onerror="showStatus('img1', false)">
+        <div id="status1"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Category Image</h2>
+        <img src="images/tile-basins.jpg" alt="Tile Basins" class="test-image" id="img2"
+             onload="showStatus('img2', true)" 
+             onerror="showStatus('img2', false)">
+        <div id="status2"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Placeholder Test</h2>
+        <img src="https://via.placeholder.com/400x300/D4AF37/FFFFFF?text=Aluth+Elegance" 
+             alt="Placeholder" class="test-image" id="img3"
+             onload="showStatus('img3', true)" 
+             onerror="showStatus('img3', false)">
+        <div id="status3"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📁 Image Folder Check</h2>
+        <p>Your images should be in: <code>images/</code> folder</p>
+        <p>Required images:</p>
+        <ul>
+            <li>product1.jpg, product2.jpg, product3.jpg, product4.jpg</li>
+            <li>tile-basins.jpg</li>
+            <li>bathroom-accessories.jpg</li>
+            <li>home-accents.jpg</li>
+            <li>hero-bg.jpg</li>
+        </ul>
+    </div>
+
+    <script>
+        function showStatus(imgId, success) {
+            const statusDiv = document.getElementById('status' + imgId.slice(-1));
+            if (success) {
+                statusDiv.innerHTML = '<div class="status success">✅ Image loaded successfully!</div>';
+            } else {
+                statusDiv.innerHTML = '<div class="status error">❌ Image failed to load. Please add images to the images/ folder.</div>';
+            }
+        }
+    </script>
+</body>
+</html>
