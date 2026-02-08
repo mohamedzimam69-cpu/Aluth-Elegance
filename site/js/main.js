@@ -214,10 +214,23 @@ function displayProducts(products) {
     const container = document.getElementById('featured-products');
     if (!container) return;
     
-    container.innerHTML = products.map(product => `
+    container.innerHTML = products.map((product, index) => {
+        // Use placeholder if image doesn't exist
+        const placeholderColors = [
+            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+        ];
+        const bgColor = placeholderColors[index % 4];
+        
+        return `
         <div class="product-card">
-            <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" loading="lazy" style="display: block;">
+            <div class="product-image" style="background: ${bgColor};">
+                <img src="${product.image}" 
+                     alt="${product.name}" 
+                     loading="lazy"
+                     onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;color:white;font-size:16px;font-weight:600;text-align:center;padding:20px;\\'>${product.name}</div>';">
                 <span class="product-badge">${product.category}</span>
             </div>
             <div class="product-info">
@@ -228,7 +241,7 @@ function displayProducts(products) {
                 </button>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 function formatPrice(price) {
